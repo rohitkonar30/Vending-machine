@@ -1,8 +1,16 @@
+#Colour codes used later
+re="\033[91m"
+bl="\033[94m"
+g="\033[92m"
+yel="\033[93m"
+
+
 MENU = {
     "espresso": {
         "ingredients": {
             "water": 50,
             "coffee": 18,
+            "milk": 0,
         },
         "cost": 1.5,
     },
@@ -34,30 +42,37 @@ resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
-    "Revenue":0
+    "Revenue":0,
 }
 def ingredient(i):
-    L=MENU[i]["ingredients"]
-    print(L)
+    r=MENU[i]["ingredients"]
+    if resources["water"]<=r["water"]:
+
+    try:
+        resources["water"]-=r["water"]
+        resources["milk"]-=r["milk"]
+        resources["coffee"]-=r["coffee"]
+    except:
+        print("error call support")
+#NEED to change
+
+
 def payment(i):
     c=MENU[i]["cost"]
     print(c)
     p=float(input("Please pay the amount"))
-    if p>c:
+    if p>=c:
         print("Here is your balance",p-c)
         print("Thank you for your payment")
         resources["revenue"]+=c
         return True
     else:
-        print("\033[93mPls enter the correct amount and retry the payment\033[0m")
+        print("\033[93m Pls enter the correct amount and retry the payment \033[0m")
         payment(i)
         return False
 
-
-
-
 on=True
-s=input("Do you want to turn on the machine?(y/n)")
+s=input("Do you want to turn on the machine?(y/n)\n")
 if s=="y":
     on=True
 else:
@@ -65,9 +80,14 @@ else:
 while on:
     print("Welcome to the vending machine!")
     print(MENU)
-    i=input("What would you like? ")
+    i=input("What would you like? \n")
     if i=="espresso":
         ingredient(i)
+        payment(i) #change
+        if payment(i):
+            print("Here is your Drink 😎")
+        else:
+            print("do sgain")
 
     break
 
