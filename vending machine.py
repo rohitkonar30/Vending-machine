@@ -48,7 +48,10 @@ def payment(i):
         print("Thank you for your payment")
         resources["revenue"]+=c
         return True
-    elif p==c:
+    else:
+        print("\033[93mPls enter the correct amount and retry the payment\033[0m")
+        payment(i)
+        return False
 
 
 
