@@ -1,9 +1,12 @@
 #Colour codes used later
+from pickle import LIST
+
+
 re="\033[91m"
 bl="\033[94m"
 g="\033[92m"
 yel="\033[93m"
-
+rs="\033[0m"
 
 MENU = {
     "espresso": {
@@ -42,18 +45,18 @@ resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
-    "Revenue":0,
+    "revenue":1000,
 }
-def ingredient(i):
-    r=MENU[i]["ingredients"]
-    if resources["water"]<=r["water"]:
+# def ingredient(i):
+#     r=MENU[i]["ingredients"]
+#     if resources["water"]<=r["water"]:
 
-    try:
-        resources["water"]-=r["water"]
-        resources["milk"]-=r["milk"]
-        resources["coffee"]-=r["coffee"]
-    except:
-        print("error call support")
+#     try: 
+#         resources["water"]-=r["water"]
+#         resources["milk"]-=r["milk"]
+#         resources["coffee"]-=r["coffee"]
+#     except:
+#         print("error call support")
 #NEED to change
 
 
@@ -72,23 +75,32 @@ def payment(i):
         return False
 
 on=True
-s=input("Do you want to turn on the machine?(y/n)\n")
-if s=="y":
-    on=True
-else:
-    on=False
+#s=input("Do you want to turn on the machine?(y/n)\n").lower()
+# if s=="y":
+#     on=True
+# else:
+#     on=False
 while on:
     print("Welcome to the vending machine!")
-    print(MENU)
+#    print(MENU)
     i=input("What would you like? \n")
     if i=="espresso":
-        ingredient(i)
+#        ingredient(i)
         payment(i) #change
         if payment(i):
             print("Here is your Drink 😎")
         else:
-            print("do sgain")
-
-    break
+            print("do again")
+    elif i=="e000":
+        resources["water"]=0
+        resources["milk"]=0
+        resources["coffee"]=0
+        print(f"{yel}The machine has been reset{rs}")
+        print(f"{g}The revenue collected is: ${resources['revenue']}{rs}")
+        print(f"{g}Money successfully transferred{rs}")
+        resources["revenue"]=0
+    elif i=="report":
+        print(f"{bl}The resources available are: {*list(resources),}{rs}")
+             
 
 
