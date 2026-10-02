@@ -166,7 +166,7 @@ while on:
         print(f"The resources available are:")
         for k,v in resources.items():
             print(f"{bl} {k}:{v} {rs}")
-        time.sleep(1)    
+        time.sleep(3)    
     elif i=="off":
         print(f"{re}The machine has been turned off{rs}")
         on=False
@@ -241,4 +241,4 @@ while on:
     else:
         time.sleep(0.5)
         print(f"{yel}WARNING:The item you have selected is not available{rs}")
-        time.sleep(1)
+        time.sleep(2)
