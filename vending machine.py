@@ -1,7 +1,4 @@
 #Colour codes used later
-from pickle import LIST
-
-
 re="\033[91m"
 bl="\033[94m"
 g="\033[92m"
@@ -33,13 +30,12 @@ MENU = {
         },
         "cost": 3.0,
     },
-    "Stock":{
+}    
+Stock={
         "Chips": {"cost":10,
                   "qty":10}},
-    "chocolate":{"cost":5,
+        "chocolate":{"cost":5,
                  "qty":5},
-
-}
 
 resources = {
     "water": 300,
@@ -47,18 +43,16 @@ resources = {
     "coffee": 100,
     "revenue":1000,
 }
-# def ingredient(i):
-#     r=MENU[i]["ingredients"]
-#     if resources["water"]<=r["water"]:
-
-#     try: 
-#         resources["water"]-=r["water"]
-#         resources["milk"]-=r["milk"]
-#         resources["coffee"]-=r["coffee"]
-#     except:
-#         print("error call support")
-#NEED to change
-
+def chk(i):
+    n=MENU[i]["ingredients"]
+    for k,v in n.items():
+        if resources[k]<v:
+            print(f"{re}Sorry there is not enough {k}{rs}")
+            return False
+    return True
+def make(i):
+    for k,v in MENU[i]["ingredients"].items():
+        resources[k]-=v
 
 def payment(i):
     c=MENU[i]["cost"]
@@ -100,7 +94,28 @@ while on:
         print(f"{g}Money successfully transferred{rs}")
         resources["revenue"]=0
     elif i=="report":
-        print(f"{bl}The resources available are: {*list(resources),}{rs}")
-             
-
+        print(f"The resources available are:")
+        for k,v in resources.items():
+            print(f"{bl} {k}:{v} {rs}")
+    elif i=="off":
+        print(f"{re}The machine has been turned off{rs}")
+        on=False
+    elif i=="fill":
+        resources["water"]=int(input("Enter the amount of water to refill: "))
+        resources["milk"]=int(input("Enter the amount of milk to refill: "))
+        resources["coffee"]=int(input("Enter the amount of coffee to refill: "))
+        print(f"{g}The machine has been refilled Successfully{rs}")
+    else:
+        try:
+            if chk(i):
+                payment(i)
+                if payment(i):
+                    make(i)
+                    print(f"{g}Here is your {i} 😎{rs}")
+                else:
+                    print(f"{re}Try again later{rs}")
+                pass
+        except KeyError:
+            print(f"{re}The item you have selected is not available{rs}")
+    break         
 
