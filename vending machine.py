@@ -110,11 +110,11 @@ def payment(d,i):
         return False
 
 on=True
-#s=input("Do you want to turn on the machine?(y/n)\n").lower()
-# if s=="y":
-#     on=True
-# else:
-#     on=False
+s=input("Do you want to turn on the machine?(y/n)\n").lower()
+if s=="y":
+    on=True
+else:
+    on=False
 while on:
     print("Welcome to the vending machine!")
     print(f"{g}The stock available is:{rs}")
@@ -124,7 +124,7 @@ while on:
     for k,v in MENU.items():
         print(f"{bl}{k}: ${v['cost']} {rs}")    
 #    print(MENU)
-    i=input("What would you like? \n")
+    i=input("What would you like? \n").lower()
     if i in MENU.keys():
         if chk(i):
             p=payment(MENU,i)
@@ -183,11 +183,14 @@ while on:
         p=getpass("Enter authentication password: ")
         if p==Admin_pass:
             print(f"{g}Authentication successful{rs}")
+            time.sleep(0.5)
             print(f"\n{bgr}{bl}{bol} ⚠️  WARNING: ADMIN MODE ACTIVE   {rs}\n")
+            time.sleep(0.5)
             print(f"{mg}{bol}[Access Granted]:{rs} You are logged in with {re}Administrator{rs} privileges.\n")
             a=True
         else:
             print(f"{re}Authentication failed{rs}")
+            time.sleep(0.5)
             print(f"{mg}{bol}[Access Denied]:{rs} You do not have the necessary permissions to access this section.\n")
             a=False
         while a:
