@@ -1,10 +1,13 @@
+from getpass import getpass
+
 #Colour codes used later
 re="\033[91m"
 bl="\033[94m"
 g="\033[92m"
 yel="\033[93m"
 rs="\033[0m"
-
+Admin_pass="admin@01#"
+a=False
 MENU = {
     "espresso": {
         "ingredients": {
@@ -30,17 +33,33 @@ MENU = {
         },
         "cost": 3.0,
     },
+    "water":{
+        "ingredients": {
+            "water": 100,
+            "milk": 0,
+            "coffee": 0,
+        },
+        "cost": 1.0,
+    }
 }    
 Stock={
         "Chips": {"cost":10,
-                  "qty":10}},
+                  "qty":10},
         "chocolate":{"cost":5,
                  "qty":5},
+        "cookies":{"cost":15,
+                   "qty":5},
+        "soda":{"cost":20,
+                "qty":30},
+        "instant noodles":{"cost":30,
+                         "qty":10},
+
+}                 
 
 resources = {
     "water": 300,
-    "milk": 200,
-    "coffee": 100,
+    "milk": 300,
+    "coffee": 300,
     "revenue":1000,
 }
 def chk(i):
@@ -101,10 +120,19 @@ while on:
         print(f"{re}The machine has been turned off{rs}")
         on=False
     elif i=="fill":
-        resources["water"]=int(input("Enter the amount of water to refill: "))
-        resources["milk"]=int(input("Enter the amount of milk to refill: "))
-        resources["coffee"]=int(input("Enter the amount of coffee to refill: "))
+        resources["water"]+=int(input("Enter the amount of water to refill: "))
+        resources["milk"]+=int(input("Enter the amount of milk to refill: "))
+        resources["coffee"]+=int(input("Enter the amount of coffee to refill: "))
         print(f"{g}The machine has been refilled Successfully{rs}")
+    elif i=="main":
+        p=getpass.getpass("Enter authentication password: ")
+        if p==Admin_pass:
+            print(f"{g}Authentication successful{rs}")
+            a=True
+        else:
+            print(f"{re}Authentication failed{rs}")
+            a=False
+
     else:
         try:
             if chk(i):
@@ -116,6 +144,6 @@ while on:
                     print(f"{re}Try again later{rs}")
                 pass
         except KeyError:
-            print(f"{re}The item you have selected is not available{rs}")
+            print(f"{yel}The item you have selected is not available{rs}")
     break         
 
