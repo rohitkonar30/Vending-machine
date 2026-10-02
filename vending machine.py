@@ -106,8 +106,13 @@ def payment(d,i):
     else:
         print(f"{yel}Pls enter the correct amount and retry the payment{rs}")
         time.sleep(0.1)
-        payment(d,i)
-        return False
+        q=input("Do you want to retry the payment? (y/n): ").lower()
+        if q=="y":
+            return payment(d,i)
+        else:
+            print(f"{re}Transaction Cancelled. Please try again later.{rs}")
+            time.sleep(0.1)
+            return False
 
 on=True
 s=input("Do you want to turn on the machine?(y/n)\n").lower()
