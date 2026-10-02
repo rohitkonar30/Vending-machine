@@ -123,7 +123,6 @@ while on:
     print("The available drinks are:")
     for k,v in MENU.items():
         print(f"{bl}{k}: ${v['cost']} {rs}")    
-#    print(MENU)
     i=input("What would you like? \n").lower()
     if i in MENU.keys():
         if chk(i):
@@ -156,6 +155,7 @@ while on:
             print(f"{bl}Sorry for the inconvenience{rs}")       
         time.sleep(1)     
     elif i=="e000":
+#resets the machine by setting all the resources to 0        
         resources["water"]=0
         resources["milk"]=0
         resources["coffee"]=0
@@ -163,6 +163,7 @@ while on:
         print(f"{yel}The machine has been reset{rs}")
         time.sleep(0.5)
     elif i=="report":
+#shares the resources available in the machine        
         print(f"The resources available are:")
         for k,v in resources.items():
             print(f"{bl} {k}:{v} {rs}")
@@ -173,6 +174,7 @@ while on:
         print(f"{g}Thank you for using the vending machine!{rs}")
         time.sleep(0.5)
     elif i=="fill":
+#refilling the machine        
         resources["water"]+=int(input("Enter the amount of water to refill: "))
         resources["milk"]+=int(input("Enter the amount of milk to refill: "))
         resources["coffee"]+=int(input("Enter the amount of coffee to refill: "))
@@ -180,6 +182,7 @@ while on:
         print(f"{g}The machine has been refilled Successfully{rs}")
         time.sleep(0.5)
     elif i=="main":
+#Admin mode         
         p=getpass("Enter authentication password: ")
         if p==Admin_pass:
             print(f"{g}Authentication successful{rs}")
